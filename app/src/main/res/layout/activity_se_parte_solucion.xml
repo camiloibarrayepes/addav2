@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.camiloandresibarrayepes.adda_app.se_parte_solucion"
+    android:background="@drawable/fondo_denuncia">
+
+<AbsoluteLayout
+    android:layout_width="326dp"
+    android:layout_height="599dp"
+    android:layout_marginBottom="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.526"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.343">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="62dp"
+        android:layout_height="94dp"
+        android:layout_x="132dp"
+        android:layout_y="11dp"
+        app:srcCompat="@drawable/addalogo2_1"
+        tools:layout_editor_absoluteX="119dp"
+        tools:layout_editor_absoluteY="72dp" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="328dp"
+        android:layout_height="wrap_content"
+        android:layout_x="0dp"
+        android:layout_y="275dp"
+        android:ems="10"
+        android:hint="Nombre "
+        android:inputType="textAutoComplete|textPersonName"
+        tools:layout_editor_absoluteX="31dp"
+        tools:layout_editor_absoluteY="210dp" />
+
+    <EditText
+        android:id="@+id/editText4"
+        android:layout_width="328dp"
+        android:layout_height="wrap_content"
+        android:layout_x="0dp"
+        android:layout_y="395dp"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        tools:layout_editor_absoluteX="75dp"
+        tools:layout_editor_absoluteY="262dp" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="328dp"
+        android:layout_height="wrap_content"
+        android:layout_x="0dp"
+        android:layout_y="335dp"
+        android:ems="10"
+        android:hint="Telefono"
+        android:inputType="phone"
+        tools:layout_editor_absoluteX="75dp"
+        tools:layout_editor_absoluteY="262dp" />
+
+    <Button
+        android:id="@+id/button_registro"
+        android:layout_width="322dp"
+        android:layout_height="35dp"
+        android:layout_x="0dp"
+        android:layout_y="501dp"
+        android:background="@color/colorTop"
+        android:text="Registrarme"
+        android:textColor="@color/colorWhite"
+        tools:layout_editor_absoluteX="121dp"
+        tools:layout_editor_absoluteY="516dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="111dp"
+        android:layout_y="124dp"
+        android:text="Registrate"
+        android:textColor="@color/colorWhite"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="137dp"
+        tools:layout_editor_absoluteY="102dp" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="251dp"
+        android:layout_height="wrap_content"
+        android:layout_x="42dp"
+        android:layout_y="169dp"
+        android:text="Sé parte de la solución, registrate y ayuda de manera inmediata en caso de emergencia ambientales cerca a tu ubicación"
+        android:textColor="@color/colorWhite"
+        tools:layout_editor_absoluteX="27dp"
+        tools:layout_editor_absoluteY="172dp" />
+
+</AbsoluteLayout>
+
+</android.support.constraint.ConstraintLayout>

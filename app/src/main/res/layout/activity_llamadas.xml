@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.camiloandresibarrayepes.adda_app.llamadas"
+    android:background="@drawable/fondo_denuncia">
+
+    <AbsoluteLayout
+        android:layout_width="220dp"
+        android:layout_height="366dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/button_bomberos"
+            android:layout_width="162dp"
+            android:layout_height="wrap_content"
+            android:layout_x="25dp"
+            android:layout_y="18dp"
+            android:background="@drawable/button_bomberos"
+            android:onClick="llamar_bomberos"
+            tools:layout_editor_absoluteX="94dp"
+            tools:layout_editor_absoluteY="53dp" />
+
+        <Button
+            android:id="@+id/button_fiscalia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_x="0dp"
+            android:layout_y="232dp"
+            android:background="@drawable/button_fiscalia_ambiental"
+            android:onClick="llamar_fiscalia"
+            tools:layout_editor_absoluteX="121dp"
+            tools:layout_editor_absoluteY="112dp" />
+
+        <Button
+            android:id="@+id/button_crc"
+            android:layout_width="108dp"
+            android:layout_height="wrap_content"
+            android:layout_x="53dp"
+            android:layout_y="165dp"
+            android:background="@drawable/button_crc"
+            android:onClick="llamar_CRC"
+            tools:layout_editor_absoluteX="121dp"
+            tools:layout_editor_absoluteY="112dp" />
+
+        <Button
+            android:id="@+id/button_policia"
+            android:layout_width="136dp"
+            android:layout_height="wrap_content"
+            android:layout_x="36dp"
+            android:layout_y="90dp"
+            android:background="@drawable/button_policia"
+            android:onClick="llamar_policia"
+            tools:layout_editor_absoluteX="115dp"
+            tools:layout_editor_absoluteY="180dp" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_x="28dp"
+            android:layout_y="339dp"
+            android:text="Ubicación Popayán Cauc"
+            tools:layout_editor_absoluteX="49dp"
+            tools:layout_editor_absoluteY="253dp" />
+    </AbsoluteLayout>
+
+</android.support.constraint.ConstraintLayout>

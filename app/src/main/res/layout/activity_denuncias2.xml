@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.camiloandresibarrayepes.adda_app.denuncias"
+    tools:context="com.example.camiloandresibarrayepes.adda_app.denuncias2"
     android:background="@drawable/fondo_denuncia">
 
     <AbsoluteLayout
@@ -97,6 +97,7 @@
             android:layout_x="0dp"
             android:layout_y="333dp"
             android:background="@drawable/map"
+            android:onClick="mapa"
             tools:layout_editor_absoluteX="35dp"
             tools:layout_editor_absoluteY="352dp" />
 
@@ -113,5 +114,6 @@
             tools:layout_editor_absoluteY="430dp" />
 
     </AbsoluteLayout>
+
 
 </android.support.constraint.ConstraintLayout>
