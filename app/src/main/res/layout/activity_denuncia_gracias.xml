@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo_denuncia"
+    tools:context="com.example.camiloandresibarrayepes.adda_app.denuncia_gracias">
+
+    <RelativeLayout
+        android:layout_width="303dp"
+        android:layout_height="491dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="99dp"
+            android:layout_height="87dp"
+            android:layout_below="@+id/textView3"
+            android:layout_centerHorizontal="true"
+            app:srcCompat="@drawable/check2"
+            tools:layout_editor_absoluteX="131dp"
+            tools:layout_editor_absoluteY="229dp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="51dp"
+            android:text="Gracias"
+            android:textColor="@color/colorWhite"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="119dp"
+            tools:layout_editor_absoluteY="167dp" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="500dp"
+            android:layout_height="100dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/imageView7"
+            android:layout_marginTop="49dp"
+            android:text="Tu denuncia ha sido enviada, gracias por registrar esta eventualidad, una entidad se pondrá en contacto con tigo para solicitar ayuda adicional..."
+            android:textSize="15dp"
+            tools:layout_editor_absoluteX="25dp"
+            tools:layout_editor_absoluteY="350dp" />
+
+        <Button
+            android:id="@+id/button_volver_denuncias"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/imageView7"
+            android:layout_alignRight="@+id/imageView7"
+            android:layout_below="@+id/textView4"
+            android:layout_marginTop="92dp"
+            android:background="@android:color/holo_green_light"
+            android:text="Volver"
+            android:textColor="@color/colorWhite" />
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>
