@@ -24,10 +24,7 @@ class denuncias : AppCompatActivity() {
             startActivity(intent)
         }
 
-        ubicacion.setOnClickListener{
-            val intent = Intent(this, mapa::class.java)
-            startActivity(intent)
-        }
+
 
 
     }

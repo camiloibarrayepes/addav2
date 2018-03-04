@@ -1,35 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout
+
+    android:paddingTop="100dp"
+    android:paddingRight="50dp"
+    android:paddingLeft="50dp"
+    android:paddingBottom="50dp"
+    android:layout_gravity="center"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.camiloandresibarrayepes.adda_app.denuncias"
-    android:background="@drawable/fondo_denuncia">
+    tools:context="com.example.camiloandresibarrayepes.adda_app.denuncias2"
+    android:background="@drawable/fondo_denuncia"
+    android:orientation="vertical">
 
-    <AbsoluteLayout
-        android:layout_width="326dp"
-        android:layout_height="599dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.526"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.343">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="62dp"
+                android:layout_height="94dp"
+                android:layout_x="132dp"
+                android:layout_y="11dp"
+                app:srcCompat="@drawable/addalogo2_1"
+                tools:layout_editor_absoluteX="119dp"
+                tools:layout_editor_absoluteY="72dp" />
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="62dp"
-            android:layout_height="94dp"
-            android:layout_x="132dp"
-            android:layout_y="11dp"
-            app:srcCompat="@drawable/addalogo2_1"
-            tools:layout_editor_absoluteX="119dp"
-            tools:layout_editor_absoluteY="72dp" />
+        </LinearLayout>
+
 
         <EditText
             android:id="@+id/editText"
@@ -67,20 +69,38 @@
             tools:layout_editor_absoluteX="15dp"
             tools:layout_editor_absoluteY="325dp" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="327dp"
-            android:layout_height="wrap_content"
-            android:layout_x="0dp"
-            android:layout_y="302dp"
-            android:text="Capturar Ubicación (click en el mapa)"
-            android:textStyle="bold|italic"
-            tools:layout_editor_absoluteX="7dp"
-            tools:layout_editor_absoluteY="299dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp">
 
         <Button
+            android:id="@+id/button_camera"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_x="11dp"
+            android:layout_y="297dp"
+
+            android:background="@drawable/ic_camera_enhance_white_24dp"
+            android:elevation="20dp"
+            tools:layout_editor_absoluteX="145dp"
+            tools:layout_editor_absoluteY="430dp"/>
+        <TextView
+            android:paddingLeft="10dp"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Captura una imagen"/>
+
+    </LinearLayout>
+
+
+
+        <Button
+
             android:id="@+id/button_enviar_denuncia"
-            android:layout_width="322dp"
+            android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_x="0dp"
             android:layout_y="564dp"
@@ -90,28 +110,8 @@
             tools:layout_editor_absoluteX="121dp"
             tools:layout_editor_absoluteY="516dp" />
 
-        <Button
-            android:id="@+id/ubicacion"
-            android:layout_width="match_parent"
-            android:layout_height="146dp"
-            android:layout_x="0dp"
-            android:layout_y="333dp"
-            android:background="@drawable/map"
-            tools:layout_editor_absoluteX="35dp"
-            tools:layout_editor_absoluteY="352dp" />
 
-        <Button
-            android:id="@+id/button_camera"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_x="216dp"
-            android:layout_y="443dp"
-            android:background="@drawable/foto"
-            android:elevation="20dp"
-            android:text="Button"
-            tools:layout_editor_absoluteX="145dp"
-            tools:layout_editor_absoluteY="430dp" />
 
-    </AbsoluteLayout>
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
+

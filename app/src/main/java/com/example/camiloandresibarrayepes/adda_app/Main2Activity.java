@@ -91,7 +91,7 @@ public class Main2Activity extends AppCompatActivity {
 
     public void denuncias(View view) {
 
-        Intent intent = new Intent(getApplicationContext(), denuncias2.class)/*.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP)*/;
+        Intent intent = new Intent(getApplicationContext(), denuncias.class)/*.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP)*/;
         startActivity(intent);
     }
 
