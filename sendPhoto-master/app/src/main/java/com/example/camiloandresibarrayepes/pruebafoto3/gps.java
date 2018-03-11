@@ -26,26 +26,6 @@ public class gps extends AppCompatActivity {
     TextView mensaje1;
     TextView mensaje2;
     String longitud,latitud;
-
-    public String getLongitud() {
-
-        return longitud;
-    }
-
-    public void setLongitud(String longitud) {
-
-        this.longitud = longitud;
-    }
-
-    public String getLatitud() {
-        return latitud;
-    }
-
-    public void setLatitud(String latitud) {
-        this.latitud = latitud;
-    }
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

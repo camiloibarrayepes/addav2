@@ -2,12 +2,18 @@ package com.example.camiloandresibarrayepes.pruebafoto3;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.StrictMode;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -41,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
 
     ImageView ivCamera, ivGallery, ivImage, ivUpload;
-    EditText nombre,telefono,comentario;
+    EditText nombre, telefono, comentario;
 
     CameraPhoto cameraPhoto;
 
@@ -58,10 +64,35 @@ public class MainActivity extends AppCompatActivity {
     private static final int SOLICITUD_PERMISO_STORAGE_WRITE = 4;
     private static final int SOLICITUD_PERMISO_GPS = 5;
 
+    LocationManager locationManager;
+    double longitudeBest, latitudeBest;
+    double longitudeGPS, latitudeGPS;
+    double longitudeNetwork, latitudeNetwork;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        ///////////////////////////gps/////////////////////////////
+
+
+
+               // locationManager.removeUpdates(locationListenerGPS);
+
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+                }
+                locationManager.requestLocationUpdates(
+                        LocationManager.GPS_PROVIDER, 2 * 20 * 1000, 10, locationListenerGPS);
+
+
+
+
+        //////////////////////////////////////////////////////////
+
 
         nombre = (EditText)findViewById(R.id.nombre);
         telefono = (EditText)findViewById(R.id.telefono);
@@ -165,31 +196,35 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     Bitmap bitmap = ImageLoader.init().from(selectedPhoto).requestSize(200, 200).getBitmap();
                     String encodedImage = ImageBase64.encode(bitmap);
-                    Log.d(TAG, encodedImage);
+                   // Log.d(TAG, encodedImage);
 
                     //SEND TO PHP SCRIPT
                     HashMap<String, String> postData = new HashMap<String, String>();
                     postData.put("image", encodedImage);
+                    postData.put("nombre", String.valueOf(nombre.getText()));
+                    postData.put("telefono", String.valueOf(telefono.getText()));
+                    postData.put("comentario", String.valueOf(comentario.getText()));
+                    postData.put("latitud", Double.toString(latitudeGPS));
+                    postData.put("longitud", Double.toString(longitudeGPS));
 
 
                     PostResponseAsyncTask task = new PostResponseAsyncTask(MainActivity.this, postData, new AsyncResponse() {
                         @Override
                         public void processFinish(String s) {
-                         //   Log.d("RESPUESTA PHP",s);
+                            Log.d("RESPUESTA PHP",s);
 
                             if(s.contains("upload_success")){
                                 Toast.makeText(getApplicationContext(),"ENVIADO CON EXITO", Toast.LENGTH_SHORT).show();
 
-                                try {
+                            /*    try {
                                     enviar();
                                 } catch (ExecutionException e) {
                                     e.printStackTrace();
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
-                                }
+                                }*/
 
                             }else{
-
                                 //TODO
                                 //Change text, error por exito
                                 Toast.makeText(getApplicationContext(),
@@ -237,15 +272,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void enviar() throws ExecutionException, InterruptedException {
+    /*public void enviar() throws ExecutionException, InterruptedException {
       //  gps g = new gps();
         String method = "enviar";
         BackgroundTask backgroundTask = new BackgroundTask(this);
         backgroundTask.execute(method,nombre.getText().toString(),telefono.getText().toString(),comentario.getText().toString(),"22","44");
         //String e = backgroundTask.get();
 
-
-    }
+    }*/
 
     /*---------- LLAMADAS ------------*/
 
@@ -498,4 +532,98 @@ public class MainActivity extends AppCompatActivity {
         Bitmap bitmap1 = Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
         return bitmap1;
     }*/
+
+    /////////////TODO LO DEL GPS ////////////
+
+    private boolean checkLocation() {
+        if (!isLocationEnabled())
+            showAlert();
+        return isLocationEnabled();
+    }
+
+    private void showAlert() {
+        final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("Enable Location")
+                .setMessage("Su ubicación esta desactivada.\npor favor active su ubicación " +
+                        "usa esta app")
+                .setPositiveButton("Configuración de ubicación", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                        Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        startActivity(myIntent);
+                    }
+                })
+                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                    }
+                });
+        dialog.show();
+    }
+
+    private boolean isLocationEnabled() {
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
+                locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+    }
+
+    private final LocationListener locationListenerBest = new LocationListener() {
+        public void onLocationChanged(Location location) {
+            longitudeBest = location.getLongitude();
+            latitudeBest = location.getLatitude();
+
+        }
+
+        @Override
+        public void onStatusChanged(String s, int i, Bundle bundle) {
+        }
+
+        @Override
+        public void onProviderEnabled(String s) {
+        }
+
+        @Override
+        public void onProviderDisabled(String s) {
+        }
+    };
+
+    private final LocationListener locationListenerNetwork = new LocationListener() {
+        public void onLocationChanged(Location location) {
+            longitudeNetwork = location.getLongitude();
+            latitudeNetwork = location.getLatitude();
+
+        }
+
+        @Override
+        public void onStatusChanged(String s, int i, Bundle bundle) {
+        }
+
+        @Override
+        public void onProviderEnabled(String s) {
+
+        }
+        @Override
+        public void onProviderDisabled(String s) {
+
+        }
+    };
+
+    private final LocationListener locationListenerGPS = new LocationListener() {
+        public void onLocationChanged(Location location) {
+            longitudeGPS = location.getLongitude();
+            latitudeGPS = location.getLatitude();
+            Toast.makeText(getApplicationContext(), Double.toString(longitudeGPS) , Toast.LENGTH_SHORT).show();
+
+        }
+        @Override
+        public void onStatusChanged(String s, int i, Bundle bundle) {
+        }
+
+        @Override
+        public void onProviderEnabled(String s) {
+        }
+        @Override
+        public void onProviderDisabled(String s) {
+        }
+    };
+
 }
