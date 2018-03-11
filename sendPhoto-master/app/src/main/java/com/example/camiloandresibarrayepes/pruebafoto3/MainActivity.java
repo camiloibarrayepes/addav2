@@ -68,30 +68,12 @@ public class MainActivity extends AppCompatActivity {
     double longitudeBest, latitudeBest;
     double longitudeGPS, latitudeGPS;
     double longitudeNetwork, latitudeNetwork;
+    AlertDialog alert = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-        ///////////////////////////gps/////////////////////////////
-
-
-
-               // locationManager.removeUpdates(locationListenerGPS);
-
-                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-                }
-                locationManager.requestLocationUpdates(
-                        LocationManager.GPS_PROVIDER, 2 * 20 * 1000, 10, locationListenerGPS);
-
-
-
-
-        //////////////////////////////////////////////////////////
 
 
         nombre = (EditText)findViewById(R.id.nombre);
@@ -192,6 +174,11 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
+                if ( !locationManager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+                    AlertNoGps();
+                    return;
+                }
+
 
                 try {
                     Bitmap bitmap = ImageLoader.init().from(selectedPhoto).requestSize(200, 200).getBitmap();
@@ -207,6 +194,11 @@ public class MainActivity extends AppCompatActivity {
                     postData.put("latitud", Double.toString(latitudeGPS));
                     postData.put("longitud", Double.toString(longitudeGPS));
 
+                    if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+                    }
+                    locationManager.requestLocationUpdates(
+                            LocationManager.GPS_PROVIDER, 2 * 20 * 1000, 10, locationListenerGPS);
 
                     PostResponseAsyncTask task = new PostResponseAsyncTask(MainActivity.this, postData, new AsyncResponse() {
                         @Override
@@ -270,6 +262,28 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        ///////////////////////////gps/////////////////////////////
+
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        /****Mejora****/
+        if ( !locationManager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+            AlertNoGps();
+        }
+        /********/
+
+        // locationManager.removeUpdates(locationListenerGPS);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+        }
+        locationManager.requestLocationUpdates(
+                LocationManager.GPS_PROVIDER, 2 * 20 * 1000, 10, locationListenerGPS);
+
+
+        //////////////////////////////////////////////////////////
+
     }
 
     /*public void enviar() throws ExecutionException, InterruptedException {
@@ -280,6 +294,34 @@ public class MainActivity extends AppCompatActivity {
         //String e = backgroundTask.get();
 
     }*/
+
+    private void AlertNoGps() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("El sistema GPS esta desactivado, ¿Desea activarlo?")
+                .setCancelable(false)
+                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        dialog.cancel();
+                    }
+                });
+        alert = builder.create();
+        alert.show();
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        if(alert != null)
+        {
+            alert.dismiss ();
+        }
+    }
+
 
     /*---------- LLAMADAS ------------*/
 
@@ -611,7 +653,7 @@ public class MainActivity extends AppCompatActivity {
         public void onLocationChanged(Location location) {
             longitudeGPS = location.getLongitude();
             latitudeGPS = location.getLatitude();
-            Toast.makeText(getApplicationContext(), Double.toString(longitudeGPS) , Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(getApplicationContext(), Double.toString(longitudeGPS) , Toast.LENGTH_SHORT).show();
 
         }
         @Override
